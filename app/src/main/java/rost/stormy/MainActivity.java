@@ -2,6 +2,7 @@ package rost.stormy;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.content.ContextCompat;
@@ -12,6 +13,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +30,8 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static rost.stormy.R.string.longitude;
 
 public class MainActivity extends AppCompatActivity {
 public static final String TAG = MainActivity.class.getSimpleName();
@@ -42,6 +49,10 @@ public static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.progressBar)
     ProgressBar mProgressBar;
 
+    GPSTracker gps;
+    private double latitude;
+    private double longitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +61,12 @@ public static final String TAG = MainActivity.class.getSimpleName();
 
         mProgressBar.setVisibility(View.INVISIBLE);
 
-        final double latitude = 37.3737;
-        final double longitude = -122.122;
+        gps = new GPSTracker(MainActivity.this);
 
+        if(gps.canGetLocation) {
+             latitude = gps.getLatitude();
+             longitude = gps.getLongitude();
+        }
 
         refreshImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +156,7 @@ public static final String TAG = MainActivity.class.getSimpleName();
     }
 
     private void updateDisplay() {
-        ;
+        locationLabel.setText(mCurrentWeather.getTimeZone());
         temperatureLabel.setText((mCurrentWeather.getmTemperature() +""));
         timeLabel.setText("At " + mCurrentWeather.getFormattedTime() +" it will be");
         humidityValue.setText(mCurrentWeather.getmHumanity() +"");
