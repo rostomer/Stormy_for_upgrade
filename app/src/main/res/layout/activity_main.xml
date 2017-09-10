@@ -68,7 +68,7 @@
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="your location"
+        android:text="@string/your_location"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="32sp"
@@ -125,7 +125,7 @@
                 android:id="@+id/humidityLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="HUMIDITY"
+                android:text="@string/humidity"
                 android:textAlignment="center"
                 android:textColor="@color/TransparentWtite"/>
 
@@ -151,7 +151,7 @@
                 android:id="@+id/precipeLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="RAIN/SNOW"
+                android:text="@string/rain_snow"
                 android:textAlignment="center"
                 android:textColor="@color/TransparentWtite"/>
 
@@ -173,7 +173,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="40dp"
-        android:text="Getting currentWeather"
+        android:text="@string/getting_currentweather"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"

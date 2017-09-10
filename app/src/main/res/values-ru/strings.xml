@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Stormy</string>
+    <string name="error_message">Ошибка, пожалуйста, попробуйте ещё разю</string>
+    <string name="error_title">Ошибка!</string>
+    <string name="getting_currentweather">Получаем текущую погоду</string>
+    <string name="humidity">Влажность</string>
+    <string name="rain_snow">Дождь/Снег</string>
+    <string name="your_location">Ваше местоположение</string>
+</resources>

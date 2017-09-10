@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">Stormy</string>
-    <string name="api_key">15eeb19715d080b405c056adbcc8f05e</string>
-    <string name="forecast_URL">https://api.darksky.net/forecast/</string>
-    <string name="latitude">37.8267</string>
-    <string name="longitude">-122.4233</string>
+    <string name="api_key" translatable="false">15eeb19715d080b405c056adbcc8f05e</string>
+    <string name="forecast_URL" translatable="false">https://api.darksky.net/forecast/</string>
+    <string name="latitude" translatable="false">37.8267</string>
+    <string name="longitude" translatable="false">-122.4233</string>
     <string name="error_title">Error!</string>
     <string name="error_message">There was an error, please try again</string>
-    <string name="error_ok_button_text">OK</string>
+    <string name="error_ok_button_text" translatable="false">OK</string>
+    <string name="your_location">your location</string>
+    <string name="humidity">HUMIDITY</string>
+    <string name="rain_snow">RAIN/SNOW</string>
+    <string name="getting_currentweather">Getting currentWeather</string>
 </resources>
 
     <!-- 37.8267 -->
