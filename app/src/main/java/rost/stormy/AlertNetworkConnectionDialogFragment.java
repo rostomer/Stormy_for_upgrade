@@ -16,8 +16,8 @@ public class AlertNetworkConnectionDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Context context =getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                    .setTitle("Network problems!")
-                    .setMessage("You don't have connection to the Internet, please check the connection.")
+                    .setTitle(R.string.network_problems_title)
+                    .setMessage(R.string.Network_problems_message)
                     .setPositiveButton("OK", null);
 
         AlertDialog dialog = builder.create();

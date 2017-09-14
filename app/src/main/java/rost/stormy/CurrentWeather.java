@@ -110,8 +110,10 @@ public class CurrentWeather {
         this.mprecipChance = mprecipChance;
     }
 
-    public String getSummary() {
-        return summary;
+    public String getSummary()
+    {
+
+         return summary;
     }
 
     public void setSummary(String summary) {

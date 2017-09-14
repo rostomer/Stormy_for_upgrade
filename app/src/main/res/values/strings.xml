@@ -11,6 +11,9 @@
     <string name="humidity">HUMIDITY</string>
     <string name="rain_snow">RAIN/SNOW</string>
     <string name="getting_currentweather">Getting currentWeather</string>
+    <string name="for_time">it will be</string>
+    <string name="network_problems_title">Network problems!</string>
+    <string name="Network_problems_message">You don\'t have connection to the Internet, please check the connection.</string>
 </resources>
 
     <!-- 37.8267 -->

@@ -1,11 +1,14 @@
 package rost.stormy;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -15,11 +18,16 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 /**
  * Created by Asus on 09.09.2017.
  */
 
 public class GPSTracker extends Service implements LocationListener {
+    private static final String TAG = GPSTracker.class.getSimpleName();
 
     private final Context mContext;
 
@@ -37,10 +45,10 @@ public class GPSTracker extends Service implements LocationListener {
     double longitude; // Longitude
 
     // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 0; // 0 meters
 
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 30; // 30 seconds
 
     // Declaring a Location Manager
     protected LocationManager locationManager;
@@ -165,6 +173,8 @@ public class GPSTracker extends Service implements LocationListener {
     }
 
 
+
+
     /**
      * Function to show settings alert dialog.
      * On pressing the Settings button it will launch Settings Options.
@@ -197,7 +207,28 @@ public class GPSTracker extends Service implements LocationListener {
         alertDialog.show();
     }
 
+    public String findAddressFromLatLng(Geocoder geocoder, double latitude, double longitude)
+    {
 
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(53.9000000, 27.5666700, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (addresses != null) {
+                String cityName = addresses.get(0).getLocality();
+                String stateName = addresses.get(0).getCountryName();
+             //   String countryName = addresses.get(0).getAddressLine(2);
+                return stateName + "/" + cityName;
+            }
+        } catch (NullPointerException e)
+        {
+            Log.d(TAG, "List is NULL");
+        }
+        return "";
+    }
     @Override
     public void onLocationChanged(Location location) {
     }

@@ -2,9 +2,12 @@ package rost.stormy;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.location.Geocoder;
+import android.location.Address;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,9 +16,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.nearby.messages.Message;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONException;
@@ -23,6 +29,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Handler;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
@@ -52,6 +60,10 @@ public static final String TAG = MainActivity.class.getSimpleName();
     GPSTracker gps;
     private double latitude;
     private double longitude;
+    List<Address> mAddresses2;
+    private String currentCity;
+    private Geocoder mGeocoder;
+    private String city;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,16 +74,21 @@ public static final String TAG = MainActivity.class.getSimpleName();
         mProgressBar.setVisibility(View.INVISIBLE);
 
         gps = new GPSTracker(MainActivity.this);
+        mGeocoder = new Geocoder(this, Locale.getDefault());
 
         if(gps.canGetLocation) {
              latitude = gps.getLatitude();
              longitude = gps.getLongitude();
         }
 
+              city = gps.findAddressFromLatLng( mGeocoder, latitude,longitude);
+             Log.d(TAG, city  + " it's your information from geocoder.");
+
         refreshImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getForecast(latitude,longitude);
+
             }
         });
 
@@ -156,9 +173,9 @@ public static final String TAG = MainActivity.class.getSimpleName();
     }
 
     private void updateDisplay() {
-        locationLabel.setText(mCurrentWeather.getTimeZone());
+        locationLabel.setText(city);
         temperatureLabel.setText((mCurrentWeather.getmTemperature() +""));
-        timeLabel.setText("At " + mCurrentWeather.getFormattedTime() +" it will be");
+        timeLabel.setText("At " + mCurrentWeather.getFormattedTime() +getString(R.string.for_time));
         humidityValue.setText(mCurrentWeather.getmHumanity() +"");
         precipeValue.setText(mCurrentWeather.getMprecipChance() +"%");
         statusLabel.setText(mCurrentWeather.getSummary());
@@ -189,6 +206,10 @@ public static final String TAG = MainActivity.class.getSimpleName();
 
     }
 
+  //  @Nullable
+
+
+
     private boolean isNetworkAvailable() {
         ConnectivityManager manager = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -204,4 +225,5 @@ public static final String TAG = MainActivity.class.getSimpleName();
         AlertDialogFragment dialog = new AlertDialogFragment();
         dialog.show(getFragmentManager(), "error_dialog");
     }
+
 }
