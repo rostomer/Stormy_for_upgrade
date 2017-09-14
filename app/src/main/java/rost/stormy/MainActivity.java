@@ -1,6 +1,7 @@
 package rost.stormy;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.location.Geocoder;
 import android.location.Address;
@@ -19,10 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.nearby.messages.Message;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +36,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static rost.stormy.R.string.longitude;
 
 public class MainActivity extends AppCompatActivity {
 public static final String TAG = MainActivity.class.getSimpleName();
@@ -64,24 +60,25 @@ public static final String TAG = MainActivity.class.getSimpleName();
     private String currentCity;
     private Geocoder mGeocoder;
     private String city;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        context = this;
 
         mProgressBar.setVisibility(View.INVISIBLE);
-
         gps = new GPSTracker(MainActivity.this);
         mGeocoder = new Geocoder(this, Locale.getDefault());
-
+        Resources resources = getResources();
         if(gps.canGetLocation) {
              latitude = gps.getLatitude();
              longitude = gps.getLongitude();
         }
 
-              city = gps.findAddressFromLatLng( mGeocoder, latitude,longitude);
+              city = gps.findAddressFromLatLng( mGeocoder,latitude,longitude);
              Log.d(TAG, city  + " it's your information from geocoder.");
 
         refreshImageView.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +181,10 @@ public static final String TAG = MainActivity.class.getSimpleName();
         iconImageView.setImageDrawable(drawable);
         Log.d(TAG, mCurrentWeather.getmTemperature()+"Temperature");
     }
-
+    public static Context getContext()
+    {
+        return  context;
+    }
     private CurrentWeather getCurrentDetails(String jsonData) throws  JSONException {
             JSONObject forecast = new JSONObject(jsonData);
         //тут местоположение считывается, нужно просмотреть апи, чтобы понять, в какой строке его искать.

@@ -14,6 +14,26 @@
     <string name="for_time">it will be</string>
     <string name="network_problems_title">Network problems!</string>
     <string name="Network_problems_message">You don\'t have connection to the Internet, please check the connection.</string>
+    <string name="clear_day" translatable="false">clear-day</string>
+    <string name="clear_night" translatable="false">clear-night</string>
+    <string name="rain" translatable="false">rain</string>
+    <string name="snow" translatable="false">snow</string>
+    <string name="sleet" translatable="false">sleet</string>
+    <string name="wind" translatable="false">wind</string>
+    <string name="fog" translatable="false">fog</string>
+    <string name="cloudy" translatable="false">cloudy</string>
+    <string name="partly_cloudy_day" translatable="false">partly-cloudy-day</string>
+    <string name="partly_cloudy_night" translatable="false">partly-cloudy-night</string>
+    <string name="summury_clear_day">Clear,day</string>
+    <string name="summury_clear_night">Clear, night</string>
+    <string name="summury_rain">Rain</string>
+    <string name="summury_snow">Snow</string>
+    <string name="summury_sleet">Sleet</string>
+    <string name="summury_wind">Wind</string>
+    <string name="summury_fog">Fog</string>
+    <string name="summury_cloudy">Cloudy</string>
+    <string name="summury_partly_cloudy_day">Partly cloudy day</string>
+    <string name="summury_partly_cloudy_night">Partly cloudy night</string>
 </resources>
 
     <!-- 37.8267 -->

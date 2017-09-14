@@ -10,4 +10,14 @@
     <string name="for_time">текущее время.</string>
     <string name="Network_problems_message">Нет соединения с Интернетом, пожалуйста, проверьте соединение.</string>
     <string name="network_problems_title">Проблема с соединением!</string>
+    <string name="summury_clear_day">День, ясно</string>
+    <string name="summury_clear_night">Ночь, ясно</string>
+    <string name="summury_cloudy">Облачно</string>
+    <string name="summury_fog">Туман</string>
+    <string name="summury_partly_cloudy_day">День. Частичная облачность</string>
+    <string name="summury_partly_cloudy_night">Ночь, частичная облачность</string>
+    <string name="summury_rain">Дождь.</string>
+    <string name="summury_sleet">Дождь со снегом</string>
+    <string name="summury_snow">Снег</string>
+    <string name="summury_wind">Ветрено</string>
 </resources>

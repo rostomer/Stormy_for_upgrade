@@ -17,6 +17,7 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -209,23 +210,31 @@ public class GPSTracker extends Service implements LocationListener {
 
     public String findAddressFromLatLng(Geocoder geocoder, double latitude, double longitude)
     {
-
-        List<Address> addresses = null;
-        try {
-            addresses = geocoder.getFromLocation(53.9000000, 27.5666700, 1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            if (addresses != null) {
-                String cityName = addresses.get(0).getLocality();
-                String stateName = addresses.get(0).getCountryName();
-             //   String countryName = addresses.get(0).getAddressLine(2);
-                return stateName + "/" + cityName;
+        if(latitude != 0 && longitude != 0) {
+            List<Address> addresses = null;
+            try {
+                addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (NullPointerException e)
+            try {
+                if (addresses != null) {
+                    String cityName = addresses.get(0).getLocality();
+                    String stateName = addresses.get(0).getCountryName();
+                    //   String countryName = addresses.get(0).getAddressLine(2);
+                    return stateName + "/" + cityName;
+                }
+            } catch (NullPointerException e) {
+                Log.d(TAG, "List is NULL");
+            } catch (RuntimeException e)
+            {
+                Log.d(TAG, e.toString());
+            }
+        }
+        else
         {
-            Log.d(TAG, "List is NULL");
+            Toast.makeText(this, "you have problems with GPS, try to reuse it later", Toast.LENGTH_SHORT).show();
+
         }
         return "";
     }
