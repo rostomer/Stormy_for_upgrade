@@ -7,7 +7,7 @@
     <string name="humidity">Влажность</string>
     <string name="rain_snow">Дождь/Снег</string>
     <string name="your_location">Ваше местоположение</string>
-    <string name="for_time">текущее время.</string>
+    <string name="for_time">" текущее время."</string>
     <string name="Network_problems_message">Нет соединения с Интернетом, пожалуйста, проверьте соединение.</string>
     <string name="network_problems_title">Проблема с соединением!</string>
     <string name="summury_clear_day">День, ясно</string>

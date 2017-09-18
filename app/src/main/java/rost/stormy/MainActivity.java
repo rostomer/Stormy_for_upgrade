@@ -40,6 +40,7 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 public static final String TAG = MainActivity.class.getSimpleName();
     private CurrentWeather mCurrentWeather;
+
      @BindView(R.id.temperatureLabel) TextView temperatureLabel;
      @BindView(R.id.timeLabel) TextView timeLabel;
      @BindView(R.id.humidityValue) TextView humidityValue;
@@ -56,11 +57,11 @@ public static final String TAG = MainActivity.class.getSimpleName();
     GPSTracker gps;
     private double latitude;
     private double longitude;
-    List<Address> mAddresses2;
-    private String currentCity;
     private Geocoder mGeocoder;
     private String city;
     private static Context context;
+    private String ForecastUrl;
+    private String CurrentLocalisation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +69,16 @@ public static final String TAG = MainActivity.class.getSimpleName();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         context = this;
-
+      //  double minskLatitude = 53.89;
+      //  double minskLongitude = 27.59;
         mProgressBar.setVisibility(View.INVISIBLE);
         gps = new GPSTracker(MainActivity.this);
         mGeocoder = new Geocoder(this, Locale.getDefault());
-        Resources resources = getResources();
         if(gps.canGetLocation) {
              latitude = gps.getLatitude();
              longitude = gps.getLongitude();
+          //  latitude = minskLatitude;
+          //  longitude = minskLongitude;
         }
 
               city = gps.findAddressFromLatLng( mGeocoder,latitude,longitude);
@@ -93,16 +96,34 @@ public static final String TAG = MainActivity.class.getSimpleName();
     }
 
     private void getForecast(double latitude, double longitude) {
-        String forecastUrl = getString(R.string.forecast_URL)
-                + getString(R.string.api_key) +
-                "/" + latitude + ","
-                + longitude;
+        //Попытаться добавить этот кусочек в запрос.
+        CurrentLocalisation = Locale.getDefault().getLanguage();
+        if(CurrentLocalisation.equals("en")) {
+            ForecastUrl = getString(R.string.forecast_URL)
+                    + getString(R.string.api_key) +
+                    "/" + latitude + ","
+                    + longitude + "?lang=en&units=si";
+        }
+        else if(CurrentLocalisation.equals("ru"))
+        {
+            ForecastUrl = getString(R.string.forecast_URL)
+                    + getString(R.string.api_key) +
+                    "/" + latitude + ","
+                    + longitude + "?lang=ru&units=si";
+        }
+        else
+        {
+            ForecastUrl = getString(R.string.forecast_URL)
+                    + getString(R.string.api_key) +
+                    "/" + latitude + ","
+                    + longitude + "?units=si";
+        }
         if (isNetworkAvailable())
         {
             toggleRefresh();
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().
-                url(forecastUrl).
+                url(ForecastUrl).
                 build();
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
@@ -172,7 +193,7 @@ public static final String TAG = MainActivity.class.getSimpleName();
     private void updateDisplay() {
         locationLabel.setText(city);
         temperatureLabel.setText((mCurrentWeather.getmTemperature() +""));
-        timeLabel.setText("At " + mCurrentWeather.getFormattedTime() +getString(R.string.for_time));
+        timeLabel.setText(mCurrentWeather.getFormattedTime() + getString(R.string.for_time) + "");
         humidityValue.setText(mCurrentWeather.getmHumanity() +"");
         precipeValue.setText(mCurrentWeather.getMprecipChance() +"%");
         statusLabel.setText(mCurrentWeather.getSummary());
@@ -187,7 +208,6 @@ public static final String TAG = MainActivity.class.getSimpleName();
     }
     private CurrentWeather getCurrentDetails(String jsonData) throws  JSONException {
             JSONObject forecast = new JSONObject(jsonData);
-        //тут местоположение считывается, нужно просмотреть апи, чтобы понять, в какой строке его искать.
         String timezone = forecast.getString("timezone");
         Log.i(TAG, "From JSON: " + timezone);
         JSONObject currently = forecast.getJSONObject("currently");
