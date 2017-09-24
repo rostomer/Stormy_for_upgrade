@@ -235,6 +235,14 @@ public class GPSTracker extends Service implements LocationListener {
         }
         return "";
     }
+    public double getLastKnownLatitude()
+    {
+        return latitude;
+    }
+    public double getLastKnownLongitude()
+    {
+        return longitude;
+    }
     @Override
     public void onLocationChanged(Location location) {
     }

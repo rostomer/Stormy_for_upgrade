@@ -69,16 +69,16 @@ public static final String TAG = MainActivity.class.getSimpleName();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         context = this;
-      //  double minskLatitude = 53.89;
-      //  double minskLongitude = 27.59;
+        double minskLatitude = 53.89;
+       double minskLongitude = 27.59;
         mProgressBar.setVisibility(View.INVISIBLE);
         gps = new GPSTracker(MainActivity.this);
         mGeocoder = new Geocoder(this, Locale.getDefault());
         if(gps.canGetLocation) {
-             latitude = gps.getLatitude();
-             longitude = gps.getLongitude();
-          //  latitude = minskLatitude;
-          //  longitude = minskLongitude;
+          //   latitude = gps.getLatitude();
+          //   longitude = gps.getLongitude();
+            latitude = minskLatitude;
+            longitude = minskLongitude;
         }
 
               city = gps.findAddressFromLatLng( mGeocoder,latitude,longitude);
