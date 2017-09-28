@@ -1,14 +1,10 @@
 package rost.stormy;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.location.Geocoder;
-import android.location.Address;
-import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,8 +13,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 
 import org.json.JSONException;
@@ -26,7 +20,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Handler;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +28,8 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import rost.stormy.Dialog_Fragments.AlertDialogFragment;
+import rost.stormy.Dialog_Fragments.AlertNetworkConnectionDialogFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -69,15 +64,21 @@ public static final String TAG = MainActivity.class.getSimpleName();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         context = this;
+        //для теста на эмуляторе. пока что так и не смог проставить координаты. почему-то он не видит то, что я ему посылаю.
         double minskLatitude = 53.89;
-       double minskLongitude = 27.59;
+      double minskLongitude = 27.59;
         mProgressBar.setVisibility(View.INVISIBLE);
         gps = new GPSTracker(MainActivity.this);
+        if(gps.location == null)
+        {
+                AlertDialogFragment alarm = new AlertDialogFragment();
+                alarm.show(getFragmentManager(),TAG);
+        }
         mGeocoder = new Geocoder(this, Locale.getDefault());
         if(gps.canGetLocation) {
           //   latitude = gps.getLatitude();
           //   longitude = gps.getLongitude();
-            latitude = minskLatitude;
+           latitude = minskLatitude;
             longitude = minskLongitude;
         }
 
@@ -159,7 +160,7 @@ public static final String TAG = MainActivity.class.getSimpleName();
                     }
                     else
                         {
-                            alertUserAboutError();
+                //            alertUserAboutError();
                     }
                 } catch (IOException e) {
                     Log.e(TAG,"Exception caught:",e);
@@ -194,7 +195,7 @@ public static final String TAG = MainActivity.class.getSimpleName();
         locationLabel.setText(city);
         temperatureLabel.setText((mCurrentWeather.getmTemperature() +""));
         timeLabel.setText(mCurrentWeather.getFormattedTime() + getString(R.string.for_time) + "");
-        humidityValue.setText(mCurrentWeather.getmHumanity() +"");
+        humidityValue.setText(mCurrentWeather.getmHumanity() +"%");
         precipeValue.setText(mCurrentWeather.getMprecipChance() +"%");
         statusLabel.setText(mCurrentWeather.getSummary());
 

@@ -227,6 +227,10 @@ public class GPSTracker extends Service implements LocationListener {
             {
                 Log.d(TAG, e.toString());
             }
+              catch (Exception e)
+              {
+                  Log.d(TAG, e.toString());
+              }
         }
         else
         {
@@ -267,4 +271,5 @@ public class GPSTracker extends Service implements LocationListener {
     public IBinder onBind(Intent arg0) {
         return null;
     }
+
 }

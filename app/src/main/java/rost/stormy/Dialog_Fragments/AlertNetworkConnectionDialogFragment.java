@@ -1,4 +1,4 @@
-package rost.stormy;
+package rost.stormy.Dialog_Fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,22 +6,23 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 
+import rost.stormy.R;
+
 /**
  * Created by Asus on 03.09.2017.
  */
 
-public class AlertDialogFragment extends DialogFragment {
-
+public class AlertNetworkConnectionDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Context context = getActivity();
+        Context context =getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                .setTitle(R.string.error_title)
-                .setMessage(R.string.error_message)
-                .setPositiveButton(R.string.error_ok_button_text, null);
+                    .setTitle(R.string.network_problems_title)
+                    .setMessage(R.string.Network_problems_message)
+                    .setPositiveButton("OK", null);
 
         AlertDialog dialog = builder.create();
-        return  dialog;
+        return dialog;
     }
 }

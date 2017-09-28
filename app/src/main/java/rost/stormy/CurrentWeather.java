@@ -107,7 +107,7 @@ public class CurrentWeather {
     }
 
     public double getmHumanity() {
-        return mHumanity;
+        return mHumanity*100;
     }
 
     public void setmHumanity(double mHumanity) {
@@ -127,15 +127,10 @@ public class CurrentWeather {
 
     public String getSummary()
     {
-        String translatedSummary;
-        if(Locale.getDefault().getLanguage() == "ru")
-        {
-            translatedSummary = summary;
-        }
          return summary;
     }
 
-    public void setSummary(String summary) {
+     void setSummary(String summary) {
         this.summary = summary;
     }
 
