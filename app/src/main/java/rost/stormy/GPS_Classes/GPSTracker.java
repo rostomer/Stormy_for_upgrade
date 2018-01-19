@@ -1,4 +1,4 @@
-package rost.stormy;
+package rost.stormy.GPS_Classes;
 
 import android.app.AlertDialog;
 import android.app.Service;
@@ -36,7 +36,7 @@ public class GPSTracker extends Service implements LocationListener {
     boolean isNetworkEnabled = false;
 
     // Flag for GPS status
-    boolean canGetLocation = false;
+   public boolean canGetLocation = false;
 
     Location location; // Location
     double latitude; // Latitude

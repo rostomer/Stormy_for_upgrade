@@ -168,12 +168,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <pl.droidsonroids.gif.GifImageView
-        android:layout_width="0dp"
-        android:layout_height="551dp"
-        android:background="@android:color/darker_gray"
-        android:src="@drawable/giphy2"
-        android:visibility="invisible"/>
     <TextView
         android:id="@+id/statusLabel"
         android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package rost.stormy;
+package rost.stormy.Weather;
 
 import android.content.res.Resources;
 import java.text.SimpleDateFormat;
@@ -6,11 +6,14 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import rost.stormy.MainActivity;
+import rost.stormy.R;
+
 /**
  * Created by Asus on 03.09.2017.
  */
 
-public class CurrentWeather {
+public class Current {
     private String mIcon;
     private double mprecipChance;
     private String summary;
@@ -85,7 +88,7 @@ public class CurrentWeather {
         Date dateTime = new Date(getmTime() *1000);
         return formatter.format(dateTime);
     }
-    void setmIcon(String mIcon) {
+   public void setmIcon(String mIcon) {
         this.mIcon = mIcon;
     }
 
@@ -93,7 +96,7 @@ public class CurrentWeather {
         return mTime;
     }
 
-    void setmTime(long mTime) {
+   public void setmTime(long mTime) {
         this.mTime = mTime;
     }
 
@@ -130,7 +133,7 @@ public class CurrentWeather {
          return summary;
     }
 
-     void setSummary(String summary) {
+    public void setSummary(String summary) {
         this.summary = summary;
     }
 

@@ -1,4 +1,4 @@
-package rost.stormy.Dialog_Fragments;
+package rost.stormy.UI.Dialog_Fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
