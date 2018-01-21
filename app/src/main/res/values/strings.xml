@@ -32,6 +32,9 @@
     <string name="summury_cloudy">Cloudy</string>
     <string name="summury_partly_cloudy_day">Partly cloudy day</string>
     <string name="summury_partly_cloudy_night">Partly cloudy night</string>
+    <string name="title_activity_daily_forecast">DailyForecastActivity</string>
+    <string name="no_dayli_forecast_data">There is no data to display</string>
+    <string name="today">Today</string>
 </resources>
 
     <!-- 37.8267 -->

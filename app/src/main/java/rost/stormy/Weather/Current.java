@@ -35,51 +35,7 @@ public class Current {
     }
     public int getIconId()
     {
-        Resources resources = MainActivity.getContext().getResources();
-
-        int iconId = R.drawable.clear_day;
-
-        if (mIcon.equals(resources.getString(R.string.clear_day))) {
-
-            iconId = R.drawable.clear_day;
-        }
-        else if (mIcon.equals(resources.getString(R.string.clear_night))) {
-
-            iconId = R.drawable.clear_night;
-        }
-        else if (mIcon.equals(resources.getString(R.string.rain))) {
-
-            iconId = R.drawable.rain;
-        }
-        else if (mIcon.equals(resources.getString(R.string.snow))) {
-
-            iconId = R.drawable.snow;
-        }
-        else if (mIcon.equals(resources.getString(R.string.sleet))) {
-
-            iconId = R.drawable.sleet;
-        }
-        else if (mIcon.equals(resources.getString(R.string.wind))) {
-
-            iconId = R.drawable.wind;
-        }
-        else if (mIcon.equals(resources.getString(R.string.fog))) {
-
-            iconId = R.drawable.fog;
-        }
-        else if (mIcon.equals(resources.getString(R.string.cloudy))) {
-
-            iconId = R.drawable.cloudy;
-        }
-        else if (mIcon.equals(resources.getString(R.string.partly_cloudy_day))) {
-
-            iconId = R.drawable.partly_cloudy;
-        }
-        else if (mIcon.equals(resources.getString(R.string.partly_cloudy_night))) {
-
-            iconId = R.drawable.cloudy_night;
-        }
-        return iconId;
+        return  Forecast.getIconId(mIcon);
     }
     public String getFormattedTime()
     {

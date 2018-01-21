@@ -1,6 +1,7 @@
 package rost.stormy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Geocoder;
 import android.net.ConnectivityManager;
@@ -24,6 +25,7 @@ import java.util.*;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -40,6 +42,7 @@ import rost.stormy.Weather.Hour;
 
 public class MainActivity extends AppCompatActivity {
 public static final String TAG = MainActivity.class.getSimpleName();
+public static final String DAILY_FORECAST = "DAILY_FORECAST";
     private Forecast mForecast;
 
      @BindView(R.id.temperatureLabel) TextView temperatureLabel;
@@ -312,6 +315,13 @@ public static final String TAG = MainActivity.class.getSimpleName();
     private void alertUserAboutError() {
         AlertDialogFragment dialog = new AlertDialogFragment();
         dialog.show(getFragmentManager(), "error_dialog");
+    }
+
+    @OnClick(R.id.dailyButton)
+    public void startDailyActivity(View view) {
+        Intent intent = new Intent(this, DailyForecastActivity.class);
+        intent.putExtra(DAILY_FORECAST, mForecast.getDailyForecast());
+        startActivity(intent);
     }
 
 }
